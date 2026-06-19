@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 import concurrent.futures
-from flask import Blueprint, jsonify, session
+from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 
 from app.extensions import db
@@ -108,3 +108,32 @@ def trigger_healthcheck_all():
         "message": f"Completed batch check of {len(results)} secrets",
         "results": results
     }), 200
+
+@healthcheck_bp.route("/test-healthcheck", methods=["POST"])
+@login_required
+def test_healthcheck():
+    data = request.get_json() or {}
+    url = data.get("healthcheck_url")
+    method = data.get("healthcheck_method", "GET")
+    auth_style = data.get("healthcheck_auth_style", "bearer")
+    auth_field = data.get("healthcheck_auth_field")
+    raw_value = data.get("value")
+    
+    if not url or not raw_value:
+        return jsonify({"error": "URL and Secret value are required for testing"}), 400
+        
+    class MockSecret:
+        healthcheck_url = url
+        healthcheck_method = method
+        healthcheck_auth_style = auth_style
+        healthcheck_auth_field = auth_field
+        
+    secret = MockSecret()
+    result = run_healthcheck(secret, raw_value)
+    
+    return jsonify({
+        "status": result["status"],
+        "http_status": result.get("http_status"),
+        "error_message": result.get("message")
+    }), 200
+

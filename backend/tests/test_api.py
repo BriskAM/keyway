@@ -173,5 +173,36 @@ class TestKeywayAPI(unittest.TestCase):
         self.assertEqual(resp.get_json()["status"], "error")
         self.assertEqual(resp.get_json()["error_message"], "Connection timed out")
 
+    @patch("requests.request")
+    def test_healthcheck_test_connection_endpoint(self, mock_request):
+        # Register and login
+        self.client.post("/api/auth/signup", json={
+            "email": self.email,
+            "password": self.password
+        })
+        
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_request.return_value = mock_resp
+        
+        resp = self.client.post("/api/secrets/test-healthcheck", json={
+            "healthcheck_url": "https://api.github.com/user",
+            "healthcheck_method": "GET",
+            "healthcheck_auth_style": "bearer",
+            "value": "ghp_mocktoken"
+        })
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.get_json()["status"], "valid")
+        
+        mock_request.assert_called_with(
+            method="GET",
+            url="https://api.github.com/user",
+            headers={"Authorization": "Bearer ghp_mocktoken"},
+            params={},
+            timeout=5,
+            allow_redirects=False
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
