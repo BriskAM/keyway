@@ -7,7 +7,7 @@ import SecretFormModal from "../components/SecretFormModal.vue";
 import { 
   Search, Plus, RefreshCw, Loader2, Database, 
   HelpCircle, Tag, Filter, X 
-} from "lucide-vue-next";
+} from "@lucide/vue";
 
 const route = useRoute();
 const secretsStore = useSecretsStore();

@@ -5,7 +5,7 @@ import { useSecretsStore } from "../stores/secrets";
 import { 
   AlertOctagon, AlertTriangle, XOctagon, HelpCircle, 
   ArrowRight, KeyRound, ExternalLink, CalendarDays, RefreshCw 
-} from "lucide-vue-next";
+} from "@lucide/vue";
 
 const secretsStore = useSecretsStore();
 const router = useRouter();

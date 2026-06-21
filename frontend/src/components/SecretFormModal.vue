@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, computed } from "vue";
 import api from "../api/axios";
-import { X, Eye, EyeOff, Loader2, Play, CheckCircle2, XCircle } from "lucide-vue-next";
+import { X, Eye, EyeOff, Loader2, Play, CheckCircle2, XCircle } from "@lucide/vue";
 
 const props = defineProps({
   show: {

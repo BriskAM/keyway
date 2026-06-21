@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { Calendar, AlertCircle, Clock } from "lucide-vue-next";
+import { Calendar, AlertCircle, Clock } from "@lucide/vue";
 
 const props = defineProps({
   expiryDate: {

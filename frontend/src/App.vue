@@ -1,7 +1,7 @@
 <script setup>
 import { RouterView, RouterLink, useRouter } from "vue-router";
 import { useAuthStore } from "./stores/auth";
-import { Key, LayoutDashboard, Database, LogOut, ShieldAlert } from "lucide-vue-next";
+import { Key, LayoutDashboard, Database, LogOut, ShieldAlert } from "@lucide/vue";
 
 const authStore = useAuthStore();
 const router = useRouter();

@@ -6,7 +6,7 @@ import ExpiryBadge from "./ExpiryBadge.vue";
 import { 
   Eye, EyeOff, Clipboard, Check, RefreshCw, 
   Trash2, Edit3, Loader2, KeyRound 
-} from "lucide-vue-next";
+} from "@lucide/vue";
 
 const props = defineProps({
   secret: {
