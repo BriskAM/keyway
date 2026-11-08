@@ -1,5 +1,7 @@
 # 🔑 Keyway — Encrypted Secrets Vault
 
+**[Demo, architecture diagram and install steps](https://akshitmehta.pages.dev/projects/keyway/)**
+
 Keyway is a self-hosted secrets vault designed specifically for developers to manage API keys, tokens, and credentials. Unlike a generic password manager, Keyway tracks key expiration dates and runs on-demand health checks to verify that keys are still valid against actual provider APIs.
 
 ---
