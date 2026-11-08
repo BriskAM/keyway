@@ -69,6 +69,12 @@ Ideal for testing or quick hacks without Docker.
    python backend/run.py
    ```
 
+   > **macOS:** port 5000 is used by AirPlay Receiver, so sign-up and login fail with a 403. Run the backend on another port and point the frontend at it:
+   > ```bash
+   > FLASK_RUN_PORT=5055 python backend/run.py
+   > VITE_API_BASE_URL=http://localhost:5055 npm run dev   # from frontend/
+   > ```
+
 #### Frontend
 1. Navigate to the frontend directory:
    ```bash
